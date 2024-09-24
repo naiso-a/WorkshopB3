@@ -35,7 +35,7 @@
   
   /* Style du bouton de déconnexion */
   .logout-btn {
-    background-color: #ECDB79;
+    background-color: #EFCB61;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -44,7 +44,7 @@
   }
   
   .logout-btn:hover {
-    background-color: #ECDB79;
+    background-color: #EFCB61;
   }
   
   /* Styles pour le contenu de la page d'accueil */
@@ -79,7 +79,7 @@
   
   button {
     padding: 10px 20px;
-    background-color: #EFCB61;
+    background-color: #ECDB79;
     color: white;
     border: none;
     border-radius: 5px;
