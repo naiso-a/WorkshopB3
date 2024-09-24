@@ -1,12 +1,19 @@
-import './App.css';
-import Accueil from './Components/Accueil'; // Import du composant Accueil
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Importation du Router
+import Accueil from './Components/Accueil';
+import ChooseMachine from './Components/ChooseMachine';
+import ChooseObjet from './Components/ChooseObjet';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Accueil /> {/* Affiche le composant Accueil */}
-    </div>
+    <Router> {/* Encapsuler l'application dans un Router */}
+      <Routes>
+        <Route path="/" element={<Accueil />} />
+        <Route path="/reserver-machine" element={<ChooseMachine />} />
+        <Route path="/reserver-objet" element={<ChooseObjet />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
