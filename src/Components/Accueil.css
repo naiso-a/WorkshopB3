@@ -1,31 +1,50 @@
 /* Style pour la barre de navigation */
 .navbar {
-    background-color: #333;
-    overflow: hidden;
+    background-color: #120960;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
   }
   
-  .navbar ul {
+  /* Centrage des liens de navigation */
+  .nav-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex: 1;
+    justify-content: center; /* Centre les liens de navigation */
   }
   
-  .navbar ul li {
+  .nav-links li {
     margin: 0 15px;
   }
   
-  .navbar ul li a {
+  .nav-links li a {
     color: white;
     text-decoration: none;
     padding: 14px 20px;
     display: block;
   }
   
-  .navbar ul li a:hover {
+  .nav-links li a:hover {
     background-color: #575757;
     border-radius: 4px;
+  }
+  
+  /* Style du bouton de déconnexion */
+  .logout-btn {
+    background-color: #ECDB79;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    background-color: #ECDB79;
   }
   
   /* Styles pour le contenu de la page d'accueil */
@@ -49,12 +68,18 @@
   }
   
   .option-block h2 {
-    margin-bottom: 15px;
+    margin: 15px 0; /* Ajout de marge pour séparer le titre des autres éléments */
+  }
+  
+  .option-image {
+    width: 100%; /* Ajuste la largeur de l'image pour remplir le bloc */
+    height: auto; /* Maintient le ratio d'aspect de l'image */
+    border-radius: 10px; /* Arrondit les coins de l'image */
   }
   
   button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #EFCB61;
     color: white;
     border: none;
     border-radius: 5px;
@@ -62,6 +87,6 @@
   }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #EFCB61;
   }
   
