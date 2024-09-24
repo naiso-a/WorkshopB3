@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './ProduitList.css'; // Assurez-vous d'importer le fichier CSS
+import Calendrier from './Calendrier'; // Importer Calendrier
 
 const ProduitList = () => {
   const [produits, setProduits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedProduitId, setSelectedProduitId] = useState(null); // Ajoutez cet état pour le produit sélectionné
 
   useEffect(() => {
     fetch('http://localhost:3001/index.php')
@@ -50,6 +52,7 @@ const ProduitList = () => {
             <th>Référence</th>
             <th>Photo</th>
             <th>Disponibilité</th>
+            <th>Réserver</th> {/* Ajoutez une colonne pour réserver */}
           </tr>
         </thead>
         <tbody>
@@ -66,10 +69,16 @@ const ProduitList = () => {
               <td>{produit.Reference}</td>
               <td>{produit.Photo}</td>
               <td>{produit.Disponibilité ? 'Disponible' : 'Non disponible'}</td>
+              <td>
+                <button onClick={() => setSelectedProduitId(produit.Id)}>
+                  Réserver
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {selectedProduitId && <Calendrier produitId={selectedProduitId} />} {/* Affichez le calendrier avec l'ID sélectionné */}
     </div>
   );
 };
