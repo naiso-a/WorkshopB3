@@ -1,0 +1,58 @@
+.calendrier-container {
+    max-width: 100%; /* Prendre toute la largeur de la page */
+    padding: 20px; /* Ajoute un peu d'espace autour */
+    box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur totale */
+  }
+  
+  .my-calendar {
+    width: 100%; /* Prendre toute la largeur du conteneur */
+  }
+  
+  .react-calendar {
+    color: black; /* Couleur du texte */
+  }
+  
+  .react-calendar__month-view__days__day {
+    color: black; /* Couleur des jours */
+  }
+  
+  .react-calendar__navigation button {
+    color: #000; /* Couleur des flèches de navigation */
+    background: none; /* Pas de fond */
+  }
+  
+  .react-calendar__navigation button:enabled:hover {
+    background: rgba(0, 0, 0, 0.1); /* Couleur d'arrière-plan au survol */
+  }
+  
+  .react-calendar__tile {
+    color: black; /* Couleur des dates */
+  }
+  
+  .react-calendar__tile--active {
+    background: #007bff; /* Couleur de fond pour la date active */
+    color: white; /* Couleur du texte pour la date active */
+  }
+  
+  /* Conteneur pour l'alignement des créneaux et des boutons */
+  .creaneau-container {
+    display: flex; /* Utiliser Flexbox pour aligner horizontalement */
+    justify-content: space-between; /* Espace entre le texte et le bouton */
+    align-items: center; /* Aligner verticalement au centre */
+    margin-bottom: 10px; /* Espacement entre chaque créneau */
+  }
+  
+  /* Style pour les boutons de réservation */
+  .reservation-btn {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .reservation-btn:hover {
+    background-color: #0056b3;
+  }
+  
