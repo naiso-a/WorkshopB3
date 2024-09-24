@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import './ProduitList.css'; // Assurez-vous d'importer le fichier CSS
 
 const ProduitList = () => {
   const [produits, setProduits] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // État pour gérer les erreurs
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/index.php') // Assurez-vous que l'URL est correcte
-    .then(response => {
+    fetch('http://localhost:3001/index.php')
+      .then(response => {
         if (!response.ok) {
           throw new Error('Erreur réseau lors de la récupération des données');
         }
@@ -19,7 +20,7 @@ const ProduitList = () => {
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des données :', error);
-        setError(error.message); // Mettre à jour l'état avec le message d'erreur
+        setError(error.message);
         setLoading(false);
       });
   }, []);
@@ -29,13 +30,13 @@ const ProduitList = () => {
   }
 
   if (error) {
-    return <p>Erreur : {error}</p>; // Afficher un message d'erreur si nécessaire
+    return <p>Erreur : {error}</p>;
   }
 
   return (
     <div>
       <h1>Liste des Produits</h1>
-      <table border="1">
+      <table>
         <thead>
           <tr>
             <th>ID</th>
