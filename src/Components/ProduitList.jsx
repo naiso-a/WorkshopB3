@@ -9,7 +9,7 @@ const ProduitList = () => {
   const [selectedProduitId, setSelectedProduitId] = useState(null); // Ajoutez cet état pour le produit sélectionné
 
   useEffect(() => {
-    fetch('http://localhost:3001/index.php')
+    fetch('http://localhost/WorkshopB3/index.php')
       .then(response => {
         if (!response.ok) {
           throw new Error('Erreur réseau lors de la récupération des données');

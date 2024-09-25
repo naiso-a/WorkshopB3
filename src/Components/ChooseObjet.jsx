@@ -8,9 +8,9 @@ const Chooseobjet = () => {
       {/* Barre de navigation */}
       <nav className="navbar">
         <ul className="nav-links">
-          <li><a href="#home">Accueil</a></li>
-          <li><a href="#machines">Réserver une machine</a></li>
-          <li><a href="#objets">Réserver des objets</a></li>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/reserver-machine">Réserver une machine</a></li>
+          <li><a href="/reserver-objet">Réserver des objets</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
         <button className="logout-btn">Déconnexion</button>

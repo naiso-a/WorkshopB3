@@ -3,13 +3,14 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Importez le style du calendrier
 import './Calendrier.css'; // Importez le fichier CSS personnalisé
 
-const Calendrier = () => {
+const CalendrierObjet = () => {
   const [date, setDate] = useState(new Date());
   const [horairesFixes] = useState(["08:00 - 14:00", "14:00 - 18:00", "18:00 - 00:00"]);
   const [produits, setProduits] = useState([]);
   const [produitReserve, setProduitReserve] = useState(null); // Produit sélectionné pour la réservation
   const [showProduitDropdown, setShowProduitDropdown] = useState(false); // État pour afficher la liste déroulante
   const [selectedHoraire, setSelectedHoraire] = useState(null); // État pour stocker l'horaire sélectionné
+  const [reservations, setReservations] = useState([]); // État pour stocker les réservations du produit
 
   // Charger les produits disponibles depuis la base de données
   useEffect(() => {
@@ -17,13 +18,27 @@ const Calendrier = () => {
       .then(response => response.json())
       .then(data => {
         // Filtrer les produits pour ceux qui sont disponibles
-        const produitsDisponibles = data.filter(produit => produit.Disponibilité && produit.Categorie == 1);
+        const produitsDisponibles = data.filter(produit => produit.Disponibilité && produit.Categorie == 0);
         setProduits(produitsDisponibles);
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des produits :', error);
       });
   }, []);
+
+  // Charger les réservations du produit sélectionné
+  useEffect(() => {
+    if (produitReserve) {
+      fetch(`http://localhost:3001/reservations/${produitReserve.Id}`) // Remplacez par l'URL appropriée
+        .then(response => response.json())
+        .then(data => {
+          setReservations(data); // Mettez à jour les réservations pour le produit
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des réservations :', error);
+        });
+    }
+  }, [produitReserve]);
 
   const handleDateChange = (newDate) => {
     setDate(newDate);
@@ -87,6 +102,20 @@ const Calendrier = () => {
       });
   };
 
+  // Filtrer les horaires disponibles en fonction des réservations
+  const horairesDisponibles = horairesFixes.filter(horaire => {
+    const [heureDebut] = horaire.split(" - ");
+    const dateDebut = new Date(date);
+    dateDebut.setHours(...heureDebut.split(":"));
+
+    // Vérifier si l'horaire est réservé
+    return !reservations.some(reservation => {
+      const reservationDebut = new Date(reservation.Date_Debut);
+      const reservationFin = new Date(reservation.Date_Fin);
+      return dateDebut >= reservationDebut && dateDebut < reservationFin;
+    });
+  });
+
   return (
     <div className="calendrier-page">
       <nav className="navbar">
@@ -125,7 +154,7 @@ const Calendrier = () => {
           <div>
             <h3>Plages horaires disponibles :</h3>
             <ul>
-              {horairesFixes.map((horaire, index) => (
+              {horairesDisponibles.map((horaire, index) => (
                 <li key={index}>
                   {horaire}
                   <button
@@ -139,22 +168,6 @@ const Calendrier = () => {
             </ul>
           </div>
           
-          {/* Liste déroulante des produits disponibles */}
-          {showProduitDropdown && (
-            <div>
-              <h3>Choisissez un produit :</h3>
-              <select onChange={(e) => setProduitReserve(produits.find(p => p.Id === parseInt(e.target.value)))} value={produitReserve ? produitReserve.Id : ''}>
-                <option value="">Sélectionnez un produit</option>
-                {produits.map((produit) => (
-                  <option key={produit.Id} value={produit.Id}>
-                    {produit.Nom}
-                  </option>
-                ))}
-              </select>
-              <button onClick={handleReservation}>Confirmer la réservation</button>
-            </div>
-          )}
-
           {/* Affichage du produit réservé */}
           {produitReserve && (
             <div>
@@ -167,4 +180,4 @@ const Calendrier = () => {
   );
 };
 
-export default Calendrier;
+export default CalendrierObjet;
