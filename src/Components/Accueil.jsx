@@ -9,12 +9,12 @@ const Accueil = () => {
 
   // Gestionnaire de redirection vers la page de réservation de machine
   const handleReserveMachine = () => {
-    navigate('/reserver-machine');
+    navigate('/calendrier');
   };
 
   // Gestionnaire de redirection vers la page de réservation d'objets
   const handleReserveObjet = () => {
-    navigate('/reserver-objet');
+    navigate('/calendrier');
   };
 
   return (
