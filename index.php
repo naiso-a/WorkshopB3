@@ -21,6 +21,28 @@ try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // Vérifier si c'est une requête POST pour ajouter une réservation
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['produitId']) && isset($_POST['date']) && isset($_POST['horaireDebut']) && isset($_POST['horaireFin'])) {
+        $produitId = $_POST['produitId'];
+        $dateReservation = $_POST['date'];
+        $dateDebut = $dateReservation . ' ' . $_POST['horaireDebut'];
+        $dateFin = $dateReservation . ' ' . $_POST['horaireFin'];
+        $statut = "Réservé"; // Par défaut
+
+        // Insérer la réservation dans la table reservations
+        $stmt = $pdo->prepare("INSERT INTO reservation (Produit_Id, Date_Reservation, Date_Debut, Date_Fin, Statut) VALUES (:produitId, :dateReservation, :dateDebut, :dateFin, :statut)");
+        $stmt->execute([
+            ':produitId' => $produitId,
+            ':dateReservation' => $dateReservation,
+            ':dateDebut' => $dateDebut,
+            ':dateFin' => $dateFin,
+            ':statut' => $statut
+        ]);
+
+        echo json_encode(['message' => 'Réservation enregistrée avec succès']);
+        exit;
+    }
+
     // Requête pour récupérer les données de la table produit
     $stmtProduits = $pdo->query("SELECT * FROM produit");
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ProduitList.css'; // Assurez-vous d'importer le fichier CSS
-import Calendrier from './Calendrier'; // Importer Calendrier
+import Calendrier from './Calendrier'; // Importer le calendrier
 
 const ProduitList = () => {
   const [produits, setProduits] = useState([]);
@@ -52,7 +52,6 @@ const ProduitList = () => {
             <th>Référence</th>
             <th>Photo</th>
             <th>Disponibilité</th>
-            <th>Réserver</th> {/* Ajoutez une colonne pour réserver */}
           </tr>
         </thead>
         <tbody>
@@ -69,16 +68,13 @@ const ProduitList = () => {
               <td>{produit.Reference}</td>
               <td>{produit.Photo}</td>
               <td>{produit.Disponibilité ? 'Disponible' : 'Non disponible'}</td>
-              <td>
-                <button onClick={() => setSelectedProduitId(produit.Id)}>
-                  Réserver
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {selectedProduitId && <Calendrier produitId={selectedProduitId} />} {/* Affichez le calendrier avec l'ID sélectionné */}
+
+      {/* Affichage du calendrier seulement si un produit est sélectionné */}
+      {selectedProduitId && <Calendrier produitId={selectedProduitId} />}
     </div>
   );
 };
