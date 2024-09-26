@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ProduitList.css'; // Assurez-vous d'importer le fichier CSS
+import './style.css'; // Assurez-vous d'importer le fichier CSS
 import Calendrier from './Calendrier'; // Importer le calendrier
 
 const ProduitList = () => {
@@ -28,53 +28,68 @@ const ProduitList = () => {
   }, []);
 
   if (loading) {
-    return <p>Chargement...</p>;
+    return (
+      <div className="loading-container">
+        <p>Chargement...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <p>Erreur : {error}</p>;
+    return (
+      <div className="error-container">
+        <p>Erreur : {error}</p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Liste des Produits</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>Quantité</th>
-            <th>Désignation</th>
-            <th>Commentaire</th>
-            <th>Emplacement</th>
-            <th>Date d'Achat</th>
-            <th>Référence</th>
-            <th>Photo</th>
-            <th>Disponibilité</th>
-          </tr>
-        </thead>
-        <tbody>
-          {produits.map((produit) => (
-            <tr key={produit.Id}>
-              <td>{produit.Id}</td>
-              <td>{produit.Nom}</td>
-              <td>{produit.Type}</td>
-              <td>{produit.Quantite}</td>
-              <td>{produit.Designation}</td>
-              <td>{produit.Commentaire}</td>
-              <td>{produit.Emplacement}</td>
-              <td>{produit.DateAchat}</td>
-              <td>{produit.Reference}</td>
-              <td>{produit.Photo}</td>
-              <td>{produit.Disponibilité ? 'Disponible' : 'Non disponible'}</td>
+    <div className="produit-list-container">
+      <div className="header-container">
+        <h1>Liste des Produits</h1>
+      </div>
+
+      <div className="table-container">
+        <table className="produit-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Type</th>
+              <th>Quantité</th>
+              <th>Désignation</th>
+              <th>Commentaire</th>
+              <th>Emplacement</th>
+              <th>Date d'Achat</th>
+              <th>Référence</th>
+              <th>Photo</th>
+              <th>Disponibilité</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {produits.map((produit) => (
+              <tr key={produit.Id}>
+                <td>{produit.Id}</td>
+                <td>{produit.Nom}</td>
+                <td>{produit.Type}</td>
+                <td>{produit.Quantite}</td>
+                <td>{produit.Designation}</td>
+                <td>{produit.Commentaire}</td>
+                <td>{produit.Emplacement}</td>
+                <td>{produit.DateAchat}</td>
+                <td>{produit.Reference}</td>
+                <td>{produit.Photo}</td>
+                <td>{produit.Disponibilité ? 'Disponible' : 'Non disponible'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {/* Affichage du calendrier seulement si un produit est sélectionné */}
-      {selectedProduitId && <Calendrier produitId={selectedProduitId} />}
+      <div className="calendar-container">
+        {selectedProduitId && <Calendrier produitId={selectedProduitId} />}
+      </div>
     </div>
   );
 };
