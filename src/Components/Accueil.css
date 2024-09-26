@@ -1,92 +1,43 @@
-/* Style pour la barre de navigation */
-.navbar {
-    background-color: #120960;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-  }
-  
-  /* Centrage des liens de navigation */
-  .nav-links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex: 1;
-    justify-content: center; /* Centre les liens de navigation */
-  }
-  
-  .nav-links li {
-    margin: 0 15px;
-  }
-  
-  .nav-links li a {
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
-    display: block;
-  }
-  
-  .nav-links li a:hover {
-    background-color: #575757;
-    border-radius: 4px;
-  }
-  
-  /* Style du bouton de déconnexion */
-  .logout-btn {
-    background-color: #EFCB61;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .logout-btn:hover {
-    background-color: #EFCB61;
-  }
-  
-  /* Styles pour le contenu de la page d'accueil */
-  .container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .options {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .option-block {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .option-block h2 {
-    margin: 15px 0; /* Ajout de marge pour séparer le titre des autres éléments */
-  }
-  
-  .option-image {
-    width: 100%; /* Ajuste la largeur de l'image pour remplir le bloc */
-    height: auto; /* Maintient le ratio d'aspect de l'image */
-    border-radius: 10px; /* Arrondit les coins de l'image */
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #ECDB79;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #EFCB61;
-  }
-  
+/* Accueil.css */
+
+
+
+.accueil-container {
+  text-align: center;
+}
+
+.accueil-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.accueil-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.accueil-option-block {
+  text-align: center;
+}
+
+.accueil-option-image {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.accueil-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accueil-button:hover {
+  background-color: #45a049;
+}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Importez le style du calendrier
-import './Calendrier.css'; // Importez le fichier CSS personnalisé
+import './style.css'; // Importez le fichier CSS personnalisé
+import MyDilLogo from '../assets/images/MyDIL-Logo-CMJN.png';
 
 const CalendrierObjet = () => {
   const [date, setDate] = useState(new Date());
@@ -18,7 +19,7 @@ const CalendrierObjet = () => {
       .then(response => response.json())
       .then(data => {
         // Filtrer les produits pour ceux qui sont disponibles
-        const produitsDisponibles = data.filter(produit => produit.Disponibilité && produit.Categorie == 0);
+        const produitsDisponibles = data.filter(produit => produit.Disponibilité && produit.Categorie == 1);
         setProduits(produitsDisponibles);
       })
       .catch(error => {
@@ -119,47 +120,54 @@ const CalendrierObjet = () => {
   return (
     <div className="calendrier-page">
       <nav className="navbar">
+          <div class name="logo">
+          <img src={MyDilLogo} alt="Logo" className="logo-image" />
+        </div>
         <ul className="nav-links">
           <li><a href="/">Accueil</a></li>
-          <li><a href="/reserver-machine">Réserver une machine</a></li>
-          <li><a href="/reserver-objet">Réserver des objets</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="/calendrier">Réserver une machine</a></li>
+          <li><a href="/calendrier-objet">Réserver des objets</a></li>
+          <li><a href="/aide">Aide</a></li>
         </ul>
-        <button className="logout-btn">Déconnexion</button>
       </nav>
 
       <div className="calendrier-container">
         <div className="sidebar">
           <h3>Produits Disponibles</h3>
-          <ul>
-            {produits.map((produit) => (
-              <li key={produit.Id} onClick={() => setProduitReserve(produit)}>
-                {produit.Nom}
-              </li>
-            ))}
-          </ul>
+          <div className="produits-disponibles">
+            <ul>
+              {produits.map((produit) => (
+                <li key={produit.Id} onClick={() => setProduitReserve(produit)}>
+                  {produit.Nom}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="calendar-section">
           <h2>Calendrier</h2>
-          <Calendar
-            onChange={handleDateChange}
-            value={date}
-            className="my-calendar"
-          />
-          <div>
-            <p>Date sélectionnée : {date.toDateString()}</p>
+          <div className="calendar-container">
+            <Calendar
+              onChange={handleDateChange}
+              value={date}
+              className="my-calendar"
+            />
+            <div className="selected-date">
+              <p>Date sélectionnée : {date.toDateString()}</p>
+            </div>
           </div>
-          
-          <div>
+
+          {/* Plages horaires disponibles */}
+          <div className="plages-horaires">
             <h3>Plages horaires disponibles :</h3>
             <ul>
-              {horairesDisponibles.map((horaire, index) => (
+              {horairesFixes.map((horaire, index) => (
                 <li key={index}>
                   {horaire}
                   <button
                     className="reservation-btn"
-                    onClick={() => handleReservationClick(horaire)} // Passe le horaire à la fonction de réservation
+                    onClick={() => handleReservationClick(horaire)}
                   >
                     Réserver
                   </button>
@@ -167,10 +175,26 @@ const CalendrierObjet = () => {
               ))}
             </ul>
           </div>
-          
+
+          {/* Liste déroulante des produits */}
+          {showProduitDropdown && (
+            <div className="produit-dropdown">
+              <h3>Choisissez un produit :</h3>
+              <select onChange={(e) => setProduitReserve(produits.find(p => p.Id === parseInt(e.target.value)))} value={produitReserve ? produitReserve.Id : ''}>
+                <option value="">Sélectionnez un produit</option>
+                {produits.map((produit) => (
+                  <option key={produit.Id} value={produit.Id}>
+                    {produit.Nom}
+                  </option>
+                ))}
+              </select>
+              <button onClick={handleReservation}>Confirmer la réservation</button>
+            </div>
+          )}
+
           {/* Affichage du produit réservé */}
           {produitReserve && (
-            <div>
+            <div className="produit-reserve">
               <h4>Produit réservé : {produitReserve.Nom}</h4>
             </div>
           )}
