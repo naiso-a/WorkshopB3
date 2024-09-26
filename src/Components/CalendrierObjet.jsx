@@ -15,7 +15,7 @@ const CalendrierObjet = () => {
 
   // Charger les produits disponibles depuis la base de données
   useEffect(() => {
-    fetch('http://localhost/WorkshopB3/index.php') // URL à modifier selon tes besoins
+    fetch('http://localhost:3001/index.php') // URL à modifier selon tes besoins
       .then(response => response.json())
       .then(data => {
         // Filtrer les produits pour ceux qui sont disponibles
