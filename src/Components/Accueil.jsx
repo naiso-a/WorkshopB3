@@ -1,7 +1,7 @@
 import React from 'react';
 import './Accueil.css'; // Fichier CSS pour la mise en page
 import { useNavigate } from 'react-router-dom'; 
-import machineImage from '../assets/images/machineexemple.jpeg'; // Chemin vers l'image de la machine
+import machineImage from '../assets/images/machineexmple.jpg'; // Chemin vers l'image de la machine
 import objetImage from '../assets/images/objetexemple.jpg'; // Chemin vers l'image de l'objet
 import MyDilLogo from '../assets/images/MyDIL-Logo-CMJN.png'; // Chemin vers le logo du MyDil
 
